@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        unordered_set<int> set_of_col;
+        unordered_set<int> set_of_row;
+        for(int i=0; i<matrix.size() ; i++){
+            for(int j=0; j<matrix[0].size() ; j++){
+                if(matrix[i][j] == 0){
+                    set_of_col.insert(j);
+                    set_of_row.insert(i);
+                }
+            }
+        }
+        for(auto& i:set_of_row){
+            for(int j=0; j<matrix[0].size();j++){
+                matrix[i][j] = 0;
+            }
+        }
+        for(auto& j:set_of_col){
+            for(int i=0; i<matrix.size();i++){
+                matrix[i][j] = 0;
+            }
+        }
+    }
+};
