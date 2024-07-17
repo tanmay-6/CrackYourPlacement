@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        unordered_map<int, int> mp;
+        mp[0]++;
+        int count = 0;
+        vector<int> prefix;
+        int cur = 0;
+        for(auto& i: nums){
+            cur+=i;
+            prefix.push_back(cur);
+        }
+        for(int i=0; i<prefix.size(); i++){
+            if(mp.find(prefix[i]-k) != mp.end()){
+                count += mp[prefix[i]-k];
+            }
+            mp[prefix[i]]++;
+        }
+        return count;
+    }
+};
+//thinking how this problem can be solved by two pointers
