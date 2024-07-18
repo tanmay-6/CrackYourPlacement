@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool solve(vector<int>& nums, int i, vector<int>& dp){
+        if(i>=nums.size()-1) return true;
+        if(dp[i] != -1) return dp[i];
+
+        for(int ind=nums[i]; ind>=0; ind--){
+            int next_ind = ind+i;
+            if(next_ind!=i && solve(nums, next_ind, dp)){
+                return dp[i] = true;
+            }
+        }
+        return dp[i] = false;
+    }
+    bool canJump(vector<int>& nums) {
+        vector<int> dp(nums.size()+1, -1);
+        return solve(nums, 0, dp);
+    }
+};
+//1d dp solution

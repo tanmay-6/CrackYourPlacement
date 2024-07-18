@@ -1,0 +1,24 @@
+class Solution {
+  public:
+    void solve(int ind, vector<int> &arr, set<vector<int>>& ans){
+        if(ind == arr.size()) {
+            ans.insert(arr);
+            return;
+        }
+        for(int i=ind ; i<arr.size() ; i++ ){
+            swap(arr[ind], arr[i]);
+            solve(ind+1, arr, ans);
+            swap(arr[ind], arr[i]);//backtracting
+        }
+    }
+    vector<vector<int>> uniquePerms(vector<int> &arr ,int n) {
+        set<vector<int>> ans;
+        solve(0, arr, ans);
+        vector<vector<int>> result;
+        for(auto& vec : ans){
+            result.push_back(vec);
+        }
+        return result;
+    }
+};
+//using set n vector because question stated that the order should be ascending

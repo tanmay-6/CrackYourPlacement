@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int maxScore(vector<int>& cp, int k) {
+        int n = cp.size();
+        int size = n-k;
+        int sum = 0;
+        for(int i=0; i<size; i++){
+            sum += cp[i];
+        }
+        int ans = sum;
+        int ptr = size;
+        for(int i=0 ; i<k ; i++){
+            sum = sum+cp[ptr++]-cp[i]; 
+            ans = min(ans , sum);
+        }
+        int total = accumulate(cp.begin(), cp.end(), 0);
+        return total-ans;
+    }
+};
+//just a simple sliding window
