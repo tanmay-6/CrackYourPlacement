@@ -1,0 +1,67 @@
+# python solution
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        int_to_rom = [["M", 1000],["CM", 900],["D", 500],["CD",400],["C", 100],
+	       ["XC", 90],["L", 50],["XL", 40],["X", 10],["IX", 9], ["V", 5],["IV", 4],["I", 1]]
+        roman=""
+        #3749
+        #MMMDCCXLIX
+        for symbol , val in int_to_rom:
+            if num//val:
+                count = num//val
+                roman += (symbol * count)
+                num = num%val
+        return roman
+#cpp sol 1 mine
+class Solution {
+public:
+    string intToRoman(int num) {
+        vector<pair<string,int>> dic=
+        {
+	       {"M", 1000},
+	       {"CM", 900},
+	       {"D", 500},
+	       {"CD",400},
+	       {"C", 100},
+	       {"XC", 90},
+	       {"L", 50},
+	       {"XL", 40},
+	       {"X", 10},
+	       {"IX", 9}, 
+	       {"V", 5},
+	       {"IV", 4},
+	       {"I", 1},
+        };
+        string result = "";
+        for(auto& p : dic){
+            string sym = p.first;
+            int val = p.second;
+            if( num/val ){
+                int count = num/val;
+                string temp = "";
+                while(count--){
+                    temp = temp + sym;
+                }
+                result += temp;
+            }
+            num = num%val;
+        }
+        return result;
+    }
+};
+#cpp sol 2
+class Solution {
+public:
+    string intToRoman(int num) {
+         string ans = "";
+        string  roman[] = { "M", "CM", "D", "CD", "C", "XC", "L","XL" ,"X" , "IX", "V","IV", "I"};
+        int value [] =  { 1000, 900, 500,400,100,90,50,40,10,9,5,4,1};
+        for ( int i =0 ; i <13 ; i++ ){
+            while(num >= value[i]){
+                ans+= roman[i];
+                num-= value[i];
+            }
+        }
+        return ans ;
+    }
+};
