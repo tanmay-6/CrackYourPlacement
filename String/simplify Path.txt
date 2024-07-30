@@ -1,0 +1,46 @@
+class Solution {
+public:
+    string simplifyPath(string path) {
+        int n = path.size();
+        int i =0;
+        vector<string> v;
+        while(i<n){
+            string word = "";
+            if(path[i] != '/'){
+                while(i<n && path[i]!= '/'){
+                    word.push_back(path[i]);
+                    i++;
+                }
+                // cout<<word<<" ";
+                if(word == "."){
+                    continue;
+                }
+                else if(word == ".."){
+                    if(!v.empty()){
+                        v.pop_back();   
+                    }
+                }
+                else{
+                    v.push_back(word);
+                }
+            }
+            i++;
+        }
+        string ans;
+        for(auto& i : v){
+            ans += "/"+i;
+        }
+        if(ans.empty()){
+            ans = "/";
+        }
+        return ans;
+    }
+};
+/*
+vector
+word lena hai vector me dalna hai.
+from / to / is a word
+if word == . ignore
+if word == .. {remove last word in vector}
+else (word is a word) vector . push_back(word)
+*/
